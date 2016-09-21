@@ -1,0 +1,21 @@
+extends layout
+block content
+    #wrapper
+        include header
+        #page-wrapper
+            .container-fluid
+                .row
+                    .col-lg-12
+                        h1.page-header Add new consultant
+                .row
+                    .col-lg-6
+                        form(data-toggle='validator', role='form', action='/add_consultant', method='POST')
+                            .form-group
+                                    input#inputName.form-control(name='name', type='text', placeholder='Name', data-error='Name is required', required='', autofocus='')
+                                    .help-block.with-errors
+                            .form-group
+                                    input#inputEmail.form-control(name='email', type='email', placeholder='Email', data-error='Valid email is required', required='')
+                                    .help-block.with-errors
+                            .form-group
+                                button.btn.btn-primary.success(type='submit') Add
+    include footer

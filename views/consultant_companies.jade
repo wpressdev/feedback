@@ -1,0 +1,38 @@
+extends layout
+block content
+    #wrapper
+        include header
+        #page-wrapper
+            .container-fluid
+                .row
+                    .col-lg-7
+                        h1.page-header Consultant companies
+                    .col-lg-3
+                        h1.page-header Add new
+                .row
+                    .col-lg-7
+                        table.table
+                            thead
+                                tr
+                                    th Consultant
+                                    th Company
+                            tbody
+                            each consultval in consultant_companies
+                                tr
+                                    td #{consultval.Consultant}
+                                    td #{consultval.Company}
+                    .col-lg-3
+                        .row
+                            form(method='post', action='/consultant_companies')
+                                .form-group
+                                    lable(for='consultants') Consultants
+                                    select#consultants.form-control(name='consultants')
+                                        each cval in consultants
+                                            option(value='#{cval.consultantid}') #{cval.name}
+                                .form-group
+                                    lable(for='companies') Companies
+                                    select#companies.form-control(name='companies')
+                                        each cpval in companies
+                                            option(value='#{cpval.companyid}') #{cpval.name}
+                                button.btn.btn-primary.success(type='submit') Add
+    include footer

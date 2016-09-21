@@ -1,0 +1,26 @@
+extends layout
+block content
+    #wrapper
+        include header
+        #page-wrapper
+            .container-fluid
+                a(href='/add_consultant' style='margin-top:15px;float:right;') Add new consultant
+                .row
+                    .col-lg-12
+                        h1.page-header Consultants
+                .row
+                    .col-lg-12
+                        table.table.table-striped.table-hover
+                            thead
+                                tr
+                                    th Name
+                                    th Email
+                            tbody
+                            each result in consultants
+                                tr.trLink
+                                    td #{result.name}
+                                    td #{result.email}
+                                    //td
+                                      a.editConsultant(href="edit_consultant/#{result.consultantid}", data-id='#{result.consultantid}', data-page='#{result.email}')
+                                        span.glyphicon.glyphicon-edit(aria-hidden='true', style='color:green')    
+    include footer
