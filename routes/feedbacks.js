@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
-var md5 = require('MD5');
+var md5 = require('md5');
 var dateFormat = require('dateformat');
 var now = new Date();
 

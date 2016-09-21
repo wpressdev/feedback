@@ -12,7 +12,7 @@ var http = require('http'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     expressSession = require('express-session'),
-    md5 = require('MD5'),
+    md5 = require('md5'),
     flash = require('connect-flash');
     
 var environment = process.env.ENVIRONMENT || "production",
