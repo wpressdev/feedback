@@ -38,16 +38,19 @@ objConn = mysql.createConnection({
         host     : IP_HOST,
         user     : USER_ID,
         password : USER_KEY,
-        database : USER_DB
+        database : USER_DB,
+        multipleStatements: true
     });
 
 var app = express();
-app.set('port', (process.env.PORT || 8080));
 // Trusting Openshift proxy
 app.enable('trust proxy');
 
 app.set("env", environment);
 app.set("logger", logger);
+app.set("USER_ID", USER_ID);
+app.set("USER_KEY", USER_KEY);
+app.set("IP_HOST", IP_HOST);
 
 function onError(error) {
     if (error.syscall !== "listen") {
@@ -173,8 +176,17 @@ app.use(function(err, req, res, next) {
   });
 });
 
+var port = (process.env.PORT || "8080");
+app.set("port", port);
+
+var server = http.createServer(app);
+
+server.listen(port);
+server.on("error", onError);
+console.log('Node app is running on port', app.get('port'));
+
 module.exports = app;
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
+//app.listen(app.get('port'), function() {
+//  console.log('Node app is running on port', app.get('port'));
+//});
