@@ -5,11 +5,12 @@ var express = require('express'),
     nodemailer = require('nodemailer'),
     smtpTransport = require('nodemailer-smtp-transport'),
     flash = require('connect-flash');
+    require('dotenv').config();
 
 var AUTH_USERNAME = process.env.AUTH_USERNAME,
     AUTH_PASSWORD = process.env.AUTH_PASSWORD,
     TO_EMAIL = process.env.TO_EMAIL;
-    
+
 /* Post feedback */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });

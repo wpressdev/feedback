@@ -14,6 +14,7 @@ var http = require('http'),
     expressSession = require('express-session'),
     md5 = require('md5'),
     flash = require('connect-flash');
+    require('dotenv').config();
     
 var environment = process.env.ENVIRONMENT || "production",
     IP_HOST = process.env.IP_HOST,
@@ -186,7 +187,3 @@ server.on("error", onError);
 console.log('Node app is running on port', app.get('port'));
 
 module.exports = app;
-
-//app.listen(app.get('port'), function() {
-//  console.log('Node app is running on port', app.get('port'));
-//});
