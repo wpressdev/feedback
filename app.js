@@ -43,6 +43,7 @@ objConn = mysql.createConnection({
         multipleStatements: true,
         connectionLimit: 100
     });
+objConn.connect();
 
 var app = express();
 // Trusting Openshift proxy
@@ -88,6 +89,7 @@ passport.use('local', new LocalStrategy({
     function(email, password, done) { // callback with email and password from our form
         objConn.query("SELECT * FROM users WHERE email = ? LIMIT 1;", [email], function (err, user, fields) {
             if(err){
+                console.error(err);
                 var errmessage = 'Username or password incorrect';
                 return done(null, false, { message: errmessage });
             }else{
