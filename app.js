@@ -40,7 +40,8 @@ objConn = mysql.createConnection({
         user     : USER_ID,
         password : USER_KEY,
         database : USER_DB,
-        multipleStatements: true
+        multipleStatements: true,
+        connectionLimit: 100
     });
 
 var app = express();
