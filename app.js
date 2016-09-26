@@ -1,6 +1,7 @@
 /*
     Author: Irfan Ali
 */
+require('dotenv').load();
 var http = require('http'),
     express = require("express"),
     path = require("path"),
@@ -14,12 +15,7 @@ var http = require('http'),
     expressSession = require('express-session'),
     md5 = require('md5'),
     flash = require('connect-flash');
-    //require('dotenv').config();
 
-if(!process.env.IP_HOST) {
-  var env = require('./env.js')
-}    
-    
 var environment = process.env.ENVIRONMENT || "production",
     IP_HOST = process.env.IP_HOST,
     USER_ID = process.env.USER_ID,
