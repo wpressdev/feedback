@@ -1,7 +1,6 @@
 /*
     Author: Irfan Ali
 */
-require('dotenv').load();
 var http = require('http'),
     express = require("express"),
     path = require("path"),
