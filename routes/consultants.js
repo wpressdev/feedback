@@ -3,9 +3,8 @@ var router = express.Router();
 var mysql = require('mysql');
 
 router.get('/', function(req, res, next) {
-if(res.locals.loggedinUser)
+if(res.locals.loggedinUserRole === 'admin')
 {
-  // Displaying consultants
   global.objConn.query("SELECT * FROM consultants ORDER BY consultantid DESC", function(err, consultants) {
   	if(err)
           throw err;
@@ -17,5 +16,4 @@ else
   res.render('signin', {title: 'Signin'});
 }
 });
-
 module.exports = router;

@@ -13,12 +13,14 @@ block content
                         table.table.table-striped.table-hover
                             thead
                                 tr
+                                    th Location
                                     th Name
                                     th Contact person
                                     th Email
                             tbody
                             each result in companies
                                 tr.trLink
+                                    td #{result.location}
                                     td #{result.name}
                                     td #{result.contact_person}
                                     td #{result.email}

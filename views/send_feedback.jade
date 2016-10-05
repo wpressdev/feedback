@@ -1,0 +1,76 @@
+extends layout
+block content
+    #wrapper
+        include header
+        #page-wrapper
+            .container-fluid
+                .row
+                    .col-lg-12
+                        h1.page-header Feedback form
+                .row
+                    .col-lg-12
+                        form(data-toggle='validator', role='form', action='/send_feedback', method='POST')
+                            .form-group
+                                table.table.table-striped.table-hover
+                                  tr
+                                    td 1) The consultant's skills was sufficient for the assignment.<br><br>
+                                        input#skills(type='radio', name='skills', value='Disagree', checked='true') 
+                                        | Disagree (0p)  
+                                        input#skills(type='radio', name='skills', value='Neither agree/disagree') 
+                                        | Neither agree/disagree (1p)    
+                                        input#skills(type='radio', name='skills', value='Agree') 
+                                        | Agree (3p)                        
+                                        input#skills(type='radio', name='skills', value='Strongly agree') 
+                                        | Strongly agree (5p) 
+                                  tr
+                                    td 2) The consultant was self-going and didn't need detailed supervision.<br><br>
+                                        input#motivation(type='radio', name='motivation', value='Disagree', checked='true') 
+                                        | Disagree (0p)  
+                                        input#motivation(type='radio', name='motivation', value='Neither agree/disagree') 
+                                        | Neither agree/disagree (1p)    
+                                        input#motivation(type='radio', name='motivation', value='Agree') 
+                                        | Agree (3p)                        
+                                        input#motivation(type='radio', name='motivation', value='Strongly agree') 
+                                        | Strongly agree (5p) 
+                                  tr
+                                    td 3) The consultant had a positive attitude towards the tasks and colleagues.<br><br>
+                                        input#attitude(type='radio', name='attitude', value='Disagree', checked='true') 
+                                        | Disagree (0p)  
+                                        input#attitude(type='radio', name='attitude', value='Neither agree/disagree') 
+                                        | Neither agree/disagree (1p)    
+                                        input#attitude(type='radio', name='attitude', value='Agree') 
+                                        | Agree (3p)                        
+                                        input#attitude(type='radio', name='attitude', value='Strongly agree') 
+                                        | Strongly agree (5p) 
+                                  tr
+                                    td 4) The consultant communicated in a clear and comprehending manner.<br><br>
+                                        input#communication(type='radio', name='communication', value='Disagree', checked='true') 
+                                        | Disagree (0p)  
+                                        input#communication(type='radio', name='communication', value='Neither agree/disagree') 
+                                        | Neither agree/disagree (1p)    
+                                        input#communication(type='radio', name='communication', value='Agree') 
+                                        | Agree (3p)                        
+                                        input#communication(type='radio', name='communication', value='Strongly agree') 
+                                        | Strongly agree (5p) 
+                                  tr
+                                    td 5) The consultant have been proactive and innovative.<br><br>
+                                        input#innovation(type='radio', name='innovation', value='Disagree', checked='true') 
+                                        | Disagree (0p)  
+                                        input#innovation(type='radio', name='innovation', value='Neither agree/disagree') 
+                                        | Neither agree/disagree (1p)    
+                                        input#innovation(type='radio', name='innovation', value='Agree') 
+                                        | Agree (3p)                        
+                                        input#innovation(type='radio', name='innovation', value='Strongly agree') 
+                                        | Strongly agree (5p) 
+                                  tr
+                                    td 6) Would you hire the consultant for new assignments?<br><br>
+                                        input#decision(type='radio', name='decision', value='Disagree', checked='true') 
+                                        | Disagree (0p)  
+                                        input#decision(type='radio', name='decision', value='Neither agree/disagree') 
+                                        | Neither agree/disagree (1p)    
+                                        input#decision(type='radio', name='decision', value='Agree') 
+                                        | Agree (3p)                        
+                                        input#decision(type='radio', name='decision', value='Strongly agree') 
+                                        | Strongly agree (5p) 
+                            .form-group
+                                button.btn.btn-primary.success(type='submit') Send feedback 

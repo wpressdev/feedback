@@ -1,0 +1,56 @@
+extends layout
+block content
+    #wrapper
+        include header
+        #page-wrapper
+            .container-fluid
+                .row
+                    .col-lg-12
+                            h1.page-header Feedback detail
+                .row
+                    .col-lg-4
+                        if feedbacks
+                            table.page-detail
+                              tr
+                                th Company:
+                                td #{feedbacks.Company}
+                              tr
+                                th Consultant:
+                                td #{feedbacks.Consultant}
+                              tr
+                                th Link date:
+                                td #{feedbacks.link_date}
+                              tr
+                                th Feedback date:
+                                td #{feedbacks.feedback_date}
+                <br>
+                .row
+                    .col-lg-7
+                            table.page-detail
+                              tr
+                                th The consultant's skills was sufficient for the assignment.
+                              tr
+                                th The consultant was self-going and didn't need detailed supervision.
+                              tr
+                                th The consultant had a positive attitude towards the tasks and colleagues.
+                              tr
+                                th The consultant communicated in a clear and comprehending manner.
+                              tr
+                                th The consultant have been proactive and innovative.
+                              tr
+                                th Would you hire the consultant for new assignments?
+                    .col-lg-2
+                        table.table
+                            tr
+                                td #{feedbacks.skills}
+                            tr
+                                td #{feedbacks.motivation}
+                            tr
+                                td #{feedbacks.attitude}
+                            tr
+                                td #{feedbacks.communication} 
+                            tr
+                                td #{feedbacks.innovation}     
+                            tr
+                                td #{feedbacks.decision}
+    include footer

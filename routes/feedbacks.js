@@ -1,16 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
-var md5 = require('md5');
-var dateFormat = require('dateformat');
-var now = new Date();
 
 router.get('/', function(req, res, next) {
-if(res.locals.loggedinUser)
+if(res.locals.loggedinUserRole === 'admin')
 {
-  //var userId = res.locals.loggedinUser;
-  // Displaying feedbacks
-  global.objConn.query("SELECT * FROM feedback ORDER BY feedbackId DESC", function(err, feedbacks) {
+  global.objConn.query("SELECT f.*,c.name as Consultant,com.name as Company \n\
+                               FROM consultants c,companies com,feedback f \n\
+                               WHERE c.consultantid=f.consultant_id AND com.companyid=f.company_id \n\
+                               ORDER BY f.feedback_id DESC", function(err, feedbacks) {
   	if(err)
           throw err;
     res.render('feedbacks', {title: 'Feedbacks', feedbacks: feedbacks});
@@ -21,5 +18,4 @@ else
   res.render('signin', {title: 'Signin'});
 }
 });
-
 module.exports = router;

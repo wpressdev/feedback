@@ -368,3 +368,15 @@ table.dataTable thead .sorting:after {
 .panel-yellow a:hover {
     color: #df8a13;
 }
+.logo {
+    float: left;
+    height: 50px;
+    padding: 7px 9px;
+    font-size: 18px;
+    line-height: 25px;
+}
+.page-detail{
+    padding: 8px !important;
+    line-height: 2.5 !important;
+    vertical-align: top !important;
+}

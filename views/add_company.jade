@@ -11,10 +11,18 @@ block content
                     .col-lg-6
                         form(data-toggle='validator', role='form', action='/add_company', method='POST')
                             .form-group
-                                    input#inputName.form-control(name='name', type='text', placeholder='Company Name', data-error='Name is required', required='', autofocus='')
+                                select#companies.form-control(name='location', data-error='Location is required', required='')
+                                    option(value='Stockholm') Stockholm
+                                    option(value='Göteborg') Göteborg
+                                    option(value='Malmö') Malmö                        
+                            .form-group
+                                    input#inputName.form-control(name='name', type='text', placeholder='Company Name', data-error='Company name is required', required='', autofocus='')
                                     .help-block.with-errors
                             .form-group
-                                    input#inputContactPerson.form-control(name='contact_person', type='text', placeholder='Contact Person Name', data-error='Contact Person Name is required', required='', autofocus='')
+                                    input#inputContactFirstName.form-control(name='first_name', type='text', placeholder='Contact Person First Name', data-error='First Name is required', required='', autofocus='')
+                                    .help-block.with-errors
+                            .form-group
+                                    input#inputContactPerson.form-control(name='last_name', type='text', placeholder='Contact Person Last Name', data-error='Last Name is required', required='', autofocus='')
                                     .help-block.with-errors
                             .form-group
                                     input#inputEmail.form-control(name='email', type='email', placeholder='Email', data-error='Valid email is required', required='')

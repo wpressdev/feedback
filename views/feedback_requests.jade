@@ -4,25 +4,24 @@ block content
         include header
         #page-wrapper
             .container-fluid
-                a(href='/send_feedback_link' style='margin-top:15px;float:right;') Send feedback link to customer
                 .row
                     .col-lg-12
-                        h1.page-header Customer feedbacks
+                        h1.page-header Feedback requests
                 .row
                     .col-lg-12
                         table.table.table-striped.table-hover
                             thead
                                 tr
-                                    th Customer
                                     th Consultant
+                                    th Email
                                     th Link Date
                                     th Action
                             tbody
-                            each result in feedbacks
+                            each result in feedback_requests
                                 tr.trLink
-                                    td #{result.Company}
                                     td #{result.Consultant}
+                                    td #{result.email}
                                     td #{result.link_date}
                                     td 
-                                        a(href='/feedback_detail/#{result.feedback_id}') View detail
+                                        a(href='/send_feedback/#{result.feedback_id}') Give Feedback
     include footer

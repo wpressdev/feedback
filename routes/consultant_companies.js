@@ -2,12 +2,11 @@ var express = require('express');
 var router = express.Router();
 var async = require('async');
 
-
 router.get("/", function (req, res, next) {
-    if(res.locals.loggedinUser) {
+    if(res.locals.loggedinUserRole === 'admin') {
         async.parallel({
             consultants: function(callback) {
-                objConn.query("SELECT * FROM consultants ORDER BY name ASC", function (err, result, fields){
+                global.objConn.query("SELECT * FROM consultants ORDER BY name ASC", function (err, result, fields){
                     if(err){
                         throw err;
                         callback(err);
@@ -17,7 +16,7 @@ router.get("/", function (req, res, next) {
                 });
             },
             companies: function(callback) {
-                objConn.query("SELECT * FROM companies ORDER BY name ASC", function (err, result, fields){
+                global.objConn.query("SELECT * FROM companies ORDER BY name ASC", function (err, result, fields){
                     if(err){
                         throw err;
                         callback(err);
@@ -27,7 +26,7 @@ router.get("/", function (req, res, next) {
                 });
             },
             consultant_companies: function(callback) {
-                objConn.query("SELECT cc.*,c.name as Consultant,com.name as Company \n\
+                global.objConn.query("SELECT cc.*,c.name as Consultant,com.name as Company \n\
                                FROM consultants c,companies com,consultant_company cc \n\
                                WHERE c.consultantid=cc.consultantid AND com.companyid=cc.companyid \n\
                                ORDER BY cc.id DESC", function (err, result, fields){
@@ -46,17 +45,25 @@ router.get("/", function (req, res, next) {
             res.render("consultant_companies", result);
         });
     }
+    else
+    {
+      res.render('signin', {title: 'Signin'});
+    }    
 });
 
 router.post("/", function (req, res) {
-    if(res.locals.loggedinUser) {    
-        objConn.query("INSERT INTO consultant_company (consultantid, companyid) VALUES (?,?)", [req.body.consultants, req.body.companies], function (err, content, fields) {
+    if(res.locals.loggedinUserRole === 'admin') {    
+        global.objConn.query("INSERT INTO consultant_company (consultantid, companyid) VALUES (?,?)", [req.body.consultants, req.body.companies], function (err, content, fields) {
             if(err){
                 throw err;
             }else{
                 res.redirect("/consultant_companies");
             }
         });
+    }
+    else
+    {
+      res.render('signin', {title: 'Signin'});
     }
 });    
 module.exports = router;

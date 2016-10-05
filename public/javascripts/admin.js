@@ -1,17 +1,17 @@
 $(document).ready(function(){
-    $('.deleteUser').on('click', function(e){
+    $('.location').on('change', function(e){
         e.preventDefault();
-        var id = $(this).data().id;
-        if(confirm('Do you want to remove: ' + $(this).data().page)){
+        var id = $(this).val();
+        //if(confirm('Do you want to remove: ' + $(this).data().page)){
             $.ajax({
-                url: '/users/' + id,
-                type: 'DELETE',
+                url: '/feedback_link/' + id,
+                type: 'GET',
                 data: {id: $(this).data().id},
                 //alert($(this).data().userid);
-                success: function(result) {
-                    window.location.href = '/users'
+                success: function() {
+                    window.location.href = '/feedback_link'
                 }
             });
-        }
+        //}
     });
 });
