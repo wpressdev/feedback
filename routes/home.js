@@ -7,10 +7,6 @@ router.get("/", function (req, res, next) {
     if(res.locals.loggedinUser) {
         async.parallel({
             feedback_requests: function(callback) {
-//                if(res.locals.loggedinUser && res.locals.loggedinUserRole === 'user') {
-//                    
-//                    $query= + params;
-//                }
                 var params = res.locals.loggedinUserId;
                 global.objConn.query("SELECT f.feedback_id,f.consultant_id,f.link_date,f.status,c.name as Consultant,c.email \n\
                             FROM consultants c,feedback f \n\

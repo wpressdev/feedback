@@ -12,8 +12,8 @@ block content
                         form(data-toggle='validator', role='form', action='/send_feedback_link', method='POST')
                             .form-group
                                 label(for='fcompanies') Companies
-                                select#fcompanies.form-control(name='fcompanies',data-error='Company is required', required='Notselected')
-                                    option(value='Notselected') Select company to view consultants
+                                select#fcompanies.form-control(name='fcompanies',data-error='Company is required', required='')
+                                    option(value='') Select company to view consultants
                                     if company_id
                                         each cpval in companies
                                             each cid in company_id
