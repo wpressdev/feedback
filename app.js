@@ -1,6 +1,8 @@
 /*
     Author: Irfan Ali
 */
+
+/* global __dirname */
 var http = require('http'),
     express = require("express"),
     path = require("path"),
@@ -13,6 +15,7 @@ var http = require('http'),
     LocalStrategy = require('passport-local').Strategy,
     expressSession = require('express-session'),
     md5 = require('md5'),
+    moment = require("moment"),
     flash = require('connect-flash');
 
 var environment = process.env.ENVIRONMENT || "production",
@@ -26,6 +29,7 @@ var signin = require('./routes/signin');
 var home = require('./routes/home');
 var feedbacks = require('./routes/feedbacks');
 var add_consultant = require('./routes/add_consultant');
+var edit_consultant = require('./routes/edit_consultant');
 var consultants = require('./routes/consultants');
 var add_company = require('./routes/add_company');
 var companies = require('./routes/companies');
@@ -34,6 +38,7 @@ var feedback_requests = require('./routes/feedback_requests');
 var feedback_detail = require('./routes/feedback_detail');
 var send_feedback = require('./routes/send_feedback');
 var send_feedback_link = require('./routes/send_feedback_link');
+var company_consultants = require('./routes/company_consultants');
 
 // Database connection
 objConn = mysql.createConnection({
@@ -99,6 +104,7 @@ passport.use('local', new LocalStrategy({
                 }else{
                       if(md5(password)===user[0].password){
                         // Setting session variables
+                        expressSession = '';
                         userid = user[0].userid;
                         expressSession = user[0].email;   
                         urole = user[0].role;
@@ -148,6 +154,7 @@ app.use('/home', home);
 app.use('/feedbacks', feedbacks);
 app.use('/consultants', consultants);
 app.use('/add_consultant', add_consultant);
+app.use('/edit_consultant', edit_consultant);
 app.use('/companies', companies);
 app.use('/add_company', add_company);
 app.use('/consultant_companies', consultant_companies);
@@ -155,6 +162,7 @@ app.use('/feedback_requests', feedback_requests);
 app.use('/feedback_detail', feedback_detail);
 app.use('/send_feedback', send_feedback);
 app.use('/send_feedback_link', send_feedback_link);
+app.use('/company_consultants', company_consultants);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler

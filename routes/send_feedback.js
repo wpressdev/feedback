@@ -1,7 +1,6 @@
 var express = require('express'),
     router = express.Router(),
-    dateFormat = require("dateformat"),
-    now = new Date(),
+    moment = require("moment"),
     nodemailer = require('nodemailer'),
     smtpTransport = require('nodemailer-smtp-transport');
  
@@ -14,7 +13,7 @@ if(res.locals.loggedinUser)
     res.render('send_feedback', { title: 'Express' });
     var getid = req.params.id;
     router.post("/", function (req, res) {
-    var feedback_date = dateFormat(now, "yyyy-mm-dd hh:MM:ss");
+    var feedback_date = moment().format('YYYY-MM-DD HH:mm:ss');
     global.objConn.query("SELECT f.company_id,com.name as company,com.email as email FROM companies com,feedback f \n\
                           WHERE com.companyid=f.company_id AND f.feedback_id = ?", [getid], function (err, result, fields) {
         if(err){
@@ -23,8 +22,14 @@ if(res.locals.loggedinUser)
             var company = result[0].company;
             var from_email = result[0].email;
             var emailBody = 'Hello, <br><br> We have given the feedback for one of your consultant. Please login to the dashboard to view feedback information. Thanks<br><br>' +
-                            '<br> Regards,<br><br>' + company +'<br>';        
-            global.objConn.query("UPDATE feedback SET skills = ?,motivation = ?,attitude = ?,communication = ?,innovation = ?,decision = ?,feedback_date = ?,status = ? WHERE feedback_id = ?", [req.body.skills,req.body.motivation,req.body.attitude,req.body.communication,req.body.innovation,req.body.decision,feedback_date,1,getid], function (err, content) {
+                            '<br> Regards,<br><br>' + company +'<br>';   
+            var skills = req.body.skills;
+            var motivation = req.body.motivation;
+            var attitude = req.body.con_attitude;
+            var communication = req.body.communication;
+            var innovation = req.body.innovation;
+            var decision = req.body.decision;
+            global.objConn.query("UPDATE feedback SET skills = ?,motivation = ?,attitude = ?,communication = ?,innovation = ?,decision = ?,feedback_date = ?,status = ? WHERE feedback_id = ?", [skills,motivation,attitude,communication,innovation,decision,feedback_date,1,getid], function (err, content, fields) {
                 if(err){
                     if(err.code !== "ER_DUP_ENTRY"){
                         console.log(err);
@@ -59,7 +64,7 @@ if(res.locals.loggedinUser)
                         }
                         //smtpTransport.close(); // shut down the connection pool, no more messages
                     });                
-                        res.redirect("/feedback_requests");
+                        res.redirect("/home");
                     }
                 });    
             }

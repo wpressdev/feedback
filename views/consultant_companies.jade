@@ -5,34 +5,38 @@ block content
         #page-wrapper
             .container-fluid
                 .row
-                    .col-lg-7
-                        h1.page-header Consultant companies
-                    .col-lg-3
-                        h1.page-header Add new
+                    .col-lg-12
+                        h1.page-header #{consultant.name}
                 .row
-                    .col-lg-7
-                        table.table
+                    .col-lg-12
+                        h4.page-header Companies
+                        table.table.table-striped.table-hover
                             thead
                                 tr
-                                    th Consultant
-                                    th Company
+                                    th Name
+                                    th Contact person
                             tbody
-                            each consultval in consultant_companies
-                                tr
-                                    td #{consultval.Consultant}
-                                    td #{consultval.Company}
-                    .col-lg-3
-                        .row
-                            form(method='post', action='/consultant_companies')
-                                .form-group
-                                    lable(for='consultants') Consultants
-                                    select#consultants.form-control(name='consultants')
-                                        each cval in consultants
-                                            option(value='#{cval.consultantid}') #{cval.name}
-                                .form-group
-                                    lable(for='companies') Companies
-                                    select#companies.form-control(name='companies')
-                                        each cpval in companies
-                                            option(value='#{cpval.companyid}') #{cpval.name}
-                                button.btn.btn-primary.success(type='submit') Add
+                            each result in companies
+                                tr.trLink
+                                    td #{result.Contactperson}
+                                    td #{result.email}
+                .row
+                    .col-lg-12
+                        h4.page-header Feedbacks
+                        if feedbacks
+                            table.table.table-striped.table-hover
+                                thead
+                                    tr
+                                        th Company
+                                        th Feedback date
+                                        th Action
+                                tbody
+                                each result in feedbacks
+                                    tr.trLink
+                                        td #{result.Company}
+                                        td #{result.feedback_date}
+                                        td 
+                                           a(href='/feedback_detail/#{result.feedback_id}') Feedback detail
+                        else
+                            label(for='feedback') Consultant has got no feedback yet
     include footer

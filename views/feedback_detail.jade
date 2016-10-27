@@ -40,17 +40,18 @@ block content
                               tr
                                 th Would you hire the consultant for new assignments?
                     .col-lg-2
-                        table.table
-                            tr
-                                td #{feedbacks.skills}
-                            tr
-                                td #{feedbacks.motivation}
-                            tr
-                                td #{feedbacks.attitude}
-                            tr
-                                td #{feedbacks.communication} 
-                            tr
-                                td #{feedbacks.innovation}     
-                            tr
-                                td #{feedbacks.decision}
+                        if feedbacks.skills
+                            table.table
+                                tr
+                                    td #{feedbacks.skills}
+                                tr
+                                    td #{feedbacks.motivation}
+                                tr
+                                    td #{feedbacks.attitude}
+                                tr
+                                    td #{feedbacks.communication} 
+                                tr
+                                    td #{feedbacks.innovation}     
+                                tr
+                                    td #{feedbacks.decision}
     include footer

@@ -1,0 +1,95 @@
+<!-- <!DOCTYPE HTML>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.js" integrity="sha256-5i/mQ300M779N2OVDrl16lbohwXNUdzL/R2aVUXyXWA="
+			  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/jquery.metadata/2.0/jquery.metadata.min.js" type="text/javascript"></script>
+<style>
+        .kennykee-styles{
+            font-size: 20px; 
+            font-family: Arial; 
+            margin: 10px; 
+            font-weight:bold;
+        }
+        #main-style, #result-box select{
+            font-size: 50px;
+            float: left;
+        }
+    </style>
+    <script type="text/javascript">
+ 
+        $(document).ready(function(){
+ 
+            $("#main-style").change(function(){
+                $("#main-style option:selected").each(function(){
+                    var colour_data = $(this).metadata();
+                    if(colour_data.color){
+                        var color = colour_data.color;
+                        var selectObj = $("<select></select>");
+                        var colorArray = color.split(",");
+                        for(var i = 0; i < colorArray.length; i++){
+                            selectObj.append("<option value='" + colorArray[i] + "'>" + colorArray[i] + "</option>");
+                        }
+                        $("#result-box").html(selectObj);
+                        $("#result-box").show("slow");
+                    }else{
+                        $("#result-box").hide("slow", function(){
+                            $("#result-box").html("");
+                        });
+                    }
+                });             
+            });
+        });
+ 
+    </script>
+
+</head>
+<body>
+<div class="kennykee-styles"><a href="http://kennykee.com">KennyKee Styles</a></div>
+    <select id="main-style">
+        <option>--Please Select--</option>
+        <option class="option_data {color:'blue,green'}">Colour Style 1</option>
+        <option class="option_data {color:'red,white'}">Colour Style 2</option>
+    </select>
+ 
+    <div id="result-box" ></div>
+ 
+</body>
+</html> -->
+
+<script type="text/javascript">
+var data = [ // The data
+    ['ten', [
+        'eleven','twelve'
+    ]],
+    ['twenty', [
+        'twentyone', 'twentytwo'
+    ]]
+];
+
+$a = $('#a'); // The dropdowns
+$b = $('#b');
+
+for(var i = 0; i < data.length; i++) {
+    var first = data[i][0];
+    $a.append($("<option>"). // Add options
+       attr("value",first).
+       data("sel", i).
+       text(first));
+}
+
+$a.change(function() {
+    var index = $(this).children('option:selected').data('sel');
+    var second = data[index][1]; // The second-choice data
+
+    $b.html(''); // Clear existing options in second dropdown
+
+    for(var j = 0; j < second.length; j++) {
+        $b.append($("<option>"). // Add options
+           attr("value",second[j]).
+           data("sel", j).
+           text(second[j]));
+    }
+}).change(); // Trigger once to add options at load of first choice
+
+</script>

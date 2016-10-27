@@ -4,25 +4,42 @@ block content
         include header
         #page-wrapper
             .container-fluid
-                a(href='/send_feedback_link' style='margin-top:15px;float:right;') Send feedback link to customer
+                a(href='/send_feedback_link' style='margin-top:15px;float:right;') Send feedback request to customer
                 .row
                     .col-lg-12
                         h1.page-header Customer feedbacks
                 .row
+                    .col-lg-4.pull-right
+                        input.search.form-control(type='text', placeholder='Search...')
+                        span.counter.pull-right                        
+                .row
                     .col-lg-12
-                        table.table.table-striped.table-hover
+                        table.table.table-striped.table-hover.results
                             thead
                                 tr
                                     th Customer
                                     th Consultant
-                                    th Link Date
+                                    th Feedback request date
                                     th Action
                             tbody
                             each result in feedbacks
-                                tr.trLink
-                                    td #{result.Company}
-                                    td #{result.Consultant}
-                                    td #{result.link_date}
-                                    td 
-                                        a(href='/feedback_detail/#{result.feedback_id}') View detail
+                                if result.status === 1
+                                    tr.success.trLink
+                                        td 
+                                           a(href='/company_consultants/#{result.company_id}') #{result.Company}
+                                        td 
+                                           a(href='/consultant_companies/#{result.consultant_id}') #{result.Consultant}
+                                        td #{result.link_date}
+                                        td 
+                                            a(href='/feedback_detail/#{result.feedback_id}') View detail
+                                else
+                                    tr.danger.trLink
+                                        td 
+                                           a(href='/company_consultants/#{result.company_id}') #{result.Company}
+                                        td 
+                                           a(href='/consultant_companies/#{result.consultant_id}') #{result.Consultant}
+                                        td #{result.link_date}
+                                        td 
+                                            label(for='status') Pending
+                                   
     include footer

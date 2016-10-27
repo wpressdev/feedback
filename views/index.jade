@@ -5,6 +5,12 @@ block content
             .container-fluid
                 .row
                     .col-lg-8
-                        h1.page-header Feedback
+                        script.
+                            var workflowData = #{result.company_name}
+                        h1.page-header Feedback 
+                            if workflowData === 4
+                                span not found
+                            else
+                                span workflowData
     include footer
  

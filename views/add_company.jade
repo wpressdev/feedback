@@ -6,7 +6,7 @@ block content
             .container-fluid
                 .row
                     .col-lg-12
-                        h1.page-header Add new company
+                        h1.page-header New company
                 .row
                     .col-lg-6
                         form(data-toggle='validator', role='form', action='/add_company', method='POST')
@@ -28,5 +28,5 @@ block content
                                     input#inputEmail.form-control(name='email', type='email', placeholder='Email', data-error='Valid email is required', required='')
                                     .help-block.with-errors
                             .form-group
-                                button.btn.btn-primary.success(type='submit') Add
+                                button.btn.btn-primary.success(type='submit') Add company
     include footer

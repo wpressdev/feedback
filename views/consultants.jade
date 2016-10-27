@@ -9,18 +9,29 @@ block content
                     .col-lg-12
                         h1.page-header Consultants
                 .row
+                    .col-lg-4.pull-right
+                        input.search.form-control(type='text', placeholder='Search...')
+                        span.counter.pull-right
+                .row
                     .col-lg-12
-                        table.table.table-striped.table-hover
+                        table.table.table-striped.table-hover.results
                             thead
                                 tr
                                     th Name
                                     th Email
+                                    th Designation
+                                    th Location
+                                    th Actions
                             tbody
                             each result in consultants
                                 tr.trLink
                                     td #{result.name}
                                     td #{result.email}
-                                    //td
-                                      a.editConsultant(href="edit_consultant/#{result.consultantid}", data-id='#{result.consultantid}', data-page='#{result.email}')
-                                        span.glyphicon.glyphicon-edit(aria-hidden='true', style='color:green')    
+                                    td #{result.designation}
+                                    td #{result.location}
+                                    td 
+                                        a(href='/edit_consultant/#{result.consultantid}',alt='Edit',title='Edit')  
+                                            i.fa.fa-pencil.fa-fw
+                                        a(href='/consultant_companies/#{result.consultantid}',alt='Detail',title='Detail') 
+                                            i.fa.fa-tasks.fa-fw
     include footer

@@ -9,8 +9,12 @@ block content
                     .col-lg-12
                         h1.page-header Companies
                 .row
+                    .col-lg-4.pull-right
+                        input.search.form-control(type='text', placeholder='Search...')
+                        span.counter.pull-right                        
+                .row
                     .col-lg-12
-                        table.table.table-striped.table-hover
+                        table.table.table-striped.table-hover.results
                             thead
                                 tr
                                     th Location
@@ -21,7 +25,8 @@ block content
                             each result in companies
                                 tr.trLink
                                     td #{result.location}
-                                    td #{result.name}
+                                    td 
+                                        a(href='/company_consultants/#{result.companyid}') #{result.name}
                                     td #{result.contact_person}
                                     td #{result.email}
     include footer

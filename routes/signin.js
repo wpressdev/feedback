@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-var squel = require("squel");
 
 router.get("/", function (req, res, next) {
     res.render('signin', {title: 'Signin'});

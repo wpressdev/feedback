@@ -1,0 +1,40 @@
+extends layout
+block content
+    #wrapper
+        include header
+        #page-wrapper
+            .container-fluid
+                .row
+                    .col-lg-12
+                        h1.page-header Edit consultant
+                .row
+                    .col-lg-6
+                        form(method='POST', action='/edit_consultant/#{consultants.consultantid}')
+                            .form-group
+                                label(for='name') #{consultants.name}
+                            .form-group
+                                label(for='name') #{consultants.email}
+                            .form-group
+                                input#inputDesignation.form-control(name='designation', type='designation', placeholder='Designation', data-error='Designation is required', value='#{consultants.designation}', required='')
+                                .help-block.with-errors
+                            .form-group
+                                select#location.form-control(name='location',data-error='Location is required', required='')
+                                    if consultants.location === 'Stockholm'
+                                        option(value='Stockholm', selected) Stockholm
+                                    else
+                                        option(value='Stockholm') Stockholm
+                                    if consultants.location === 'Göteborg'
+                                        option(value='Göteborg', selected) Göteborg
+                                    else
+                                        option(value='Göteborg') Göteborg                                        
+                                    if consultants.location === 'Malmö'
+                                        option(value='Malmö', selected) Malmö
+                                    else
+                                        option(value='Malmö') Malmö 
+                            .form-group
+                                select#fcompanies.form-control(name='fcompanies',multiple)
+                                    each cpval in companies
+                                        option(value='#{cpval.companyid}') #{cpval.name}                                        
+                            .form-group
+                                button.btn.btn-primary.success(type='submit') Update
+    include footer

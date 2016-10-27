@@ -6,5 +6,29 @@ block content
             .container-fluid
                 .row
                     .col-lg-12
-                        h1.page-header Dashboard
+                        if loggedinUserRole === 'user'
+                            h1.page-header Feedback requests
+                            table.table.table-striped.table-hover
+                                thead
+                                    tr
+                                        th Consultant
+                                        th Email
+                                        th Link Date
+                                        th Action
+                                tbody
+                                each result in feedback_requests
+                                    if result.status === 1
+                                        tr.success.trLink
+                                            td #{result.Consultant}
+                                            td #{result.email}
+                                            td #{result.link_date}
+                                            td
+                                                a(href='/feedback_detail/#{result.feedback_id}') View detail 
+                                    else
+                                        tr.danger.trLink
+                                            td #{result.Consultant}
+                                            td #{result.email}
+                                            td #{result.link_date}
+                                            td 
+                                                a(href='/send_feedback/#{result.feedback_id}') Give Feedback                            
     include footer

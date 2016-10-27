@@ -1,0 +1,28 @@
+extends layout
+block content
+    #wrapper
+        include header
+        #page-wrapper
+            .container-fluid
+                .row
+                    .col-lg-12
+                        h1.page-header Consultants at #{company.name}
+                .row
+                    .col-lg-4.pull-right
+                        input.search.form-control(type='text', placeholder='Search...')
+                        span.counter.pull-right                        
+                .row
+                    .col-lg-12
+                        table.table.table-striped.table-hover.results
+                            thead
+                                tr
+                                    th Name
+                                    th Email
+                                    th Designation
+                            tbody
+                            each result in consultants
+                                tr.trLink
+                                    td #{result.Consultant}
+                                    td #{result.email}
+                                    td #{result.designation}
+    include footer

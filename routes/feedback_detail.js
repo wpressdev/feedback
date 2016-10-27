@@ -3,7 +3,7 @@ var router = express.Router();
 var async = require('async');
 
 router.get("/:id", function (req, res) {
-    if(res.locals.loggedinUserRole === 'admin')
+    if(res.locals.loggedinUser)
     {
         async.parallel({
             feedbacks: function(callback) {

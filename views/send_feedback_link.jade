@@ -6,20 +6,33 @@ block content
             .container-fluid
                 .row
                     .col-lg-12
-                        h1.page-header Customer feedback link
+                        h1.page-header Customer feedback
                 .row
                     .col-lg-6
                         form(data-toggle='validator', role='form', action='/send_feedback_link', method='POST')
                             .form-group
-                                lable(for='consultants') Consultants
-                                select#consultants.form-control(name='consultants')
-                                    each cval in consultants
-                                        option(value='#{cval.consultantid}+#{cval.name}') #{cval.name}
+                                label(for='fcompanies') Companies
+                                select#fcompanies.form-control(name='fcompanies',data-error='Company is required', required='Notselected')
+                                    option(value='Notselected') Select company to view consultants
+                                    if company_id
+                                        each cpval in companies
+                                            each cid in company_id
+                                                if cid.companyid === cpval.companyid
+                                                    option(value='#{cpval.companyid}+#{cpval.email}', selected) #{cpval.name}
+                                                else
+                                                    option(value='#{cpval.companyid}+#{cpval.email}') #{cpval.name}
+                                    else
+                                        each cpval in companies
+                                            option(value='#{cpval.companyid}+#{cpval.email}') #{cpval.name}
                             .form-group
-                                lable(for='companies') Companies
-                                select#companies.form-control(name='companies')
-                                    each cpval in companies
-                                        option(value='#{cpval.companyid}+#{cpval.email}') #{cpval.name}
-                            .form-group
-                                button.btn.btn-primary.success(type='submit') Send
-    include footer
+                                if company_consultants
+                                    label(for='fconsultants') Consultants
+                                    select#fconsultants.form-control(name='fconsultants')
+                                        each cval in company_consultants
+                                            option(value='#{cval.consultantid}+#{cval.Consultant}') #{cval.Consultant}
+                                    br
+                                    .form-group
+                                        button.btn.btn-primary.success(type='submit') Send request
+    include footer                                
+
+   

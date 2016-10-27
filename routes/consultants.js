@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
 
 router.get('/', function(req, res, next) {
 if(res.locals.loggedinUserRole === 'admin')
 {
-  global.objConn.query("SELECT * FROM consultants ORDER BY consultantid DESC", function(err, consultants) {
+  global.objConn.query("SELECT * FROM consultants ORDER BY name ASC", function(err, consultants) {
   	if(err)
           throw err;
     res.render('consultants', {title: 'Consultants', consultants: consultants});
