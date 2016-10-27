@@ -6,7 +6,7 @@ router.get("/:id", function (req, res, next) {
     if(res.locals.loggedinUserRole === 'admin') {
         async.parallel({
             consultants: function(callback) {
-                global.objConn.query("SELECT cc.*,c.email,c.name as Consultant,com.name as Company \n\
+                global.objConn.query("SELECT cc.*,c.email,c.designation,c.name as Consultant,com.name as Company \n\
                                       FROM consultants c,companies com,consultant_company cc \n\
                                       WHERE c.consultantid=cc.consultantid AND com.companyid=cc.companyid \n\
                                       AND cc.companyid = ?", [req.params.id], function (err, result, fields){
