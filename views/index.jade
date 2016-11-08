@@ -1,16 +1,12 @@
 extends layout
 block content
-    #wrapper
-        #mainpage-wrapper
-            .container-fluid
-                .row
-                    .col-lg-8
-                        script.
-                            var workflowData = #{result.company_name}
-                        h1.page-header Feedback 
-                            if workflowData === 4
-                                span not found
-                            else
-                                span workflowData
-    include footer
+    .container
+      .jumbotron.text-center
+        h1
+          span.fa.fa-lock
+          |  Feedback application
+        br
+        a.btn.btn-default(href='/signin')
+          span.fa.fa-user
+          |  User Signin
  
